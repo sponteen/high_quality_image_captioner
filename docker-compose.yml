@@ -1,37 +1,8 @@
 services:
   high_quality_image_captioner:
     build: .
-    command:
-      [
-        "uvicorn",
-        "src.src:app",
-        "--host",
-        "0.0.0.0",
-        "--port",
-        "80",
-        "--reload",
-        "--reload-delay",
-        "1",
-        "--reload-dir",
-        "/app",
-        "--reload-dir",
-        "/data",
-        "--reload-exclude",
-        "db",
-        "--reload-exclude",
-        ".venv",
-        "--reload-exclude",
-        "venv",
-        "--reload-exclude",
-        "logging.yaml",
-        "--reload-include",
-        "*.yaml",
-        "--ssl-keyfile=/app/deploy/ssl/privkey.pem",
-        "--ssl-certfile=/app/deploy/ssl/fullchain.pem",
-      ]
     environment:
       - PYTHONUNBUFFERED=1
-      - WINGDB_HOSTPORT=10.220.2.200:50005
     env_file:
       - .env
     ports:

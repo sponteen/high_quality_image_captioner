@@ -12,6 +12,7 @@ import yaml
 
 from agptools.helpers import best_of
 
+
 class ModuleLoader:
     """A minimal module loader class"""
 

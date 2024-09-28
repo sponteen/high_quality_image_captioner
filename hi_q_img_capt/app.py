@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 
-
 app = FastAPI(
     title="High Quality Image Captioner",
     description="""

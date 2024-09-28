@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "hi_q_img_capt"
+version = "0.1.0"
+description = "The REST API wrapping the most performant image captioner currently in production, which is in charge of captioning the images that the Human Users upload to their User Profile."
+authors = ["Vladimir Rotariu <rotariuvladimir@gmail.com>"]
+license = "Proprietary"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.95.2"
+click = "^8.1.3"
+uvicorn = "^0.30.0"
+pyyaml = "^6.0"
+agptools = "^0.1.99"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.1"
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
