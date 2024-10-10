@@ -1,17 +1,52 @@
-"""
-A basic dynamic module loader
-"""
-
 import importlib
 import re
 import os
 import traceback
 import sys
-from typing import List
+from typing import List, Tuple, Callable, Any
 import yaml
+def get_top_item(
+    items: List[Any],
+    callable: Callable,
+    *args,
+    **kwargs,
+) -> Tuple[float, Any]:
+    top_score = float("-inf")
+    top_result = None
 
-from agptools.helpers import best_of
+    for item in items:
+        result = callable(item, *args, **kwargs)
+        if (
+            isinstance(
+                result,
+                (
+                    tuple,
+                    list,
+                ),
+            )
+            and len(result) == 2
+        ):
+            (
+                score,
+                result,
+            ) = result
+        else:
+            (
+                score,
+                result,
+            ) = (
+                result,
+                item,
+            )
 
+        if top_score < score:
+            top_score = score
+            top_result = result
+
+    return (
+        top_score,
+        top_result,
+    )
 
 class ModuleLoader:
     """A minimal module loader class"""
@@ -37,7 +72,7 @@ class ModuleLoader:
             return r, os.path.sep.join(item[:r])
 
         file = __file__.split(os.path.sep)
-        _, root_path = best_of(sys.path, score, file)
+        _, root_path = get_top_item(sys.path, score, file)
         return root_path
 
     def __init__(self, top):

@@ -1,0 +1,4 @@
+MAX_DIMENSIONS_HIQ_IMAGE = (
+    640,
+    800,
+)
