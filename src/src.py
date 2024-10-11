@@ -2,18 +2,8 @@ import os
 
 import uvicorn
 
-import logging
-
 from src.api import ports  # type: ignore
 from src.app import app  # type: ignore
-
-logging.basicConfig(
-    level=logging.INFO, 
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  
-    handlers=[logging.StreamHandler()] 
-)
-
-log = logging.getLogger("hiq_image_captioner")
 
 from fastapi.middleware.cors import (
     CORSMiddleware,
@@ -65,7 +55,6 @@ for port in ACTIVE_PORTS:
     prefix = "/".join(
         [
             "",
-            "aiml",
             port.__name__.split(".")[-1],
         ]
     )
