@@ -1,9 +1,5 @@
 import os
 
-from time import (
-    sleep,
-)
-
 import uvicorn
 
 import logging

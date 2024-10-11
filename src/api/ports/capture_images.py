@@ -40,7 +40,7 @@ async def capture_hq_images(
     image_orders = [metadata[index].image_order for index in range(len(images))]
     if len(set(image_orders)) != len(image_orders):
         return JSONResponse(
-            status_code=400,
+            status_code=409,
             content={"error": "The image orders must be unique."},
         )
 
