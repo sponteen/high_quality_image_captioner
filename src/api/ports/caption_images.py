@@ -10,6 +10,7 @@ from fastapi.responses import (
     JSONResponse,
 )
 
+import torch
 from transformers import (
     BlipProcessor,
     BlipForConditionalGeneration,
@@ -40,7 +41,7 @@ HEXA_DIGEST_32_BYTES_REGEXP = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global processor, model, HEXA_DIGEST_32_BYTES_REGEXP
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     os.makedirs("./model_storage/blip_large/blip_large_processor", exist_ok=True)
     processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
@@ -58,7 +59,7 @@ async def lifespan(app: FastAPI):
     model.save_pretrained("./model_storage/blip_large/blip_large_model", from_pt=True)
     model = BlipForConditionalGeneration.from_pretrained(
         "./model_storage/blip_large/blip_large_model"
-    )
+    ).to(device)
 
     HEXA_DIGEST_32_BYTES_REGEXP = re.compile(r"^[a-fA-F0-9]{64}$")
 
@@ -116,7 +117,7 @@ async def caption_hq_images(
     try:
         captions = []
         async for image_order, caption in generate_captions(
-            images_with_orders, processor, model
+            images_with_orders, processor, model, device # type: ignore
         ):
             captions.append({"image_order": image_order, "caption": caption})
         return JSONResponse(status_code=200, content={"captions": captions})

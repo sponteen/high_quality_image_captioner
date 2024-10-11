@@ -15,9 +15,9 @@ pyyaml = "^6.0"
 torch = "^2.4.1"
 transformers = "^4.45.2"
 pillow = "^10.4.0"
-python-multipart = "^0.0.12"
 asyncpg = "^0.29.0"
 psutil = "^6.0.0"
+python-multipart = "^0.0.12"
 
 [tool.poetry.group.dev.dependencies]
 jupyterlab = "^4.2.5"
