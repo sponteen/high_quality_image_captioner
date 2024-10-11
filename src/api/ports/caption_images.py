@@ -34,6 +34,7 @@ from typing import (
 
 API_ORDER = 0
 
+device = None
 processor = None
 model = None
 HEXA_DIGEST_32_BYTES_REGEXP = None
@@ -41,6 +42,8 @@ HEXA_DIGEST_32_BYTES_REGEXP = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    global device, processor, model, HEXA_DIGEST_32_BYTES_REGEXP
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     os.makedirs("./model_storage/blip_large/blip_large_processor", exist_ok=True)
