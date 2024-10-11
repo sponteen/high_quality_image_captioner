@@ -5,6 +5,8 @@ import traceback
 import sys
 from typing import List, Tuple, Callable, Any
 import yaml
+
+
 def get_top_item(
     items: List[Any],
     callable: Callable,
@@ -47,6 +49,7 @@ def get_top_item(
         top_score,
         top_result,
     )
+
 
 class ModuleLoader:
     """A minimal module loader class"""

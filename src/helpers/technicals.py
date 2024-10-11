@@ -1,6 +1,7 @@
 import sys
 from typing import List, Tuple, Callable, Any
 
+
 def get_top_item(
     items: List[Any],
     callable: Callable,
