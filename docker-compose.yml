@@ -7,7 +7,14 @@ services:
       - .env
     ports:
       - 14080:8000
+    runtime: nvidia
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all  
+              capabilities: [gpu]

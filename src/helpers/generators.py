@@ -17,11 +17,11 @@ def caption_image(image, processor, model, device) -> str:
     with torch.no_grad():
         output = model.generate(
             **inputs,
-            max_length=70,
-            min_length=40,
-            num_beams=5,
+            max_length=55,
+            min_length=25,
+            num_beams=7,
             early_stopping=True,
-            no_repeat_ngram_size=7
+            no_repeat_ngram_size=2
         )
 
     return processor.decode(output[0], skip_special_tokens=True)
